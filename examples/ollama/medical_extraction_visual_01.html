@@ -1,0 +1,195 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">剂量</span> <span class="lx-label" style="background-color:#C8E6C9;">用药频率</span> <span class="lx-label" style="background-color:#FEF0C3;">给药途径</span> <span class="lx-label" style="background-color:#F9DEDC;">药品名称</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+
+【病历摘要】
+患者女性，65岁，2型糖尿病病史5年，本次因血糖控制不佳入院：
+1. <span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#F9DEDC;">胰岛素注射液（短效）</span>：<span class="lx-highlight" data-idx="1" style="background-color:#FEF0C3;">皮下注射</span>，每次<span class="lx-highlight" data-idx="2" style="background-color:#D2E3FC;">10U</span>，<span class="lx-highlight" data-idx="3" style="background-color:#C8E6C9;">每餐前30分钟</span>，持续使用；
+2. <span class="lx-highlight" data-idx="4" style="background-color:#F9DEDC;">二甲双胍片</span>：<span class="lx-highlight" data-idx="5" style="background-color:#FEF0C3;"><span class="lx-highlight" data-idx="6" style="background-color:#FEF0C3;">口服</span></span>，每次<span class="lx-highlight" data-idx="7" style="background-color:#D2E3FC;">500mg</span>，<span class="lx-highlight" data-idx="8" style="background-color:#C8E6C9;">每日3次</span>，连服30天；
+3. <span class="lx-highlight" data-idx="9" style="background-color:#F9DEDC;">阿托伐他汀钙片</span>：口服，每次<span class="lx-highlight" data-idx="10" style="background-color:#D2E3FC;">20mg</span>，<span class="lx-highlight" data-idx="11" style="background-color:#C8E6C9;">每晚1次</span>，长期服用。
+
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="11" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/12</span> |
+          Pos <span id="posInfo">[43-53]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "\u836f\u54c1\u540d\u79f0", "text": "\u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09", "color": "#F9DEDC", "startPos": 43, "endPos": 53, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. ", "extractionText": "\u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09", "afterText": "\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u836f\u54c1\u540d\u79f0</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u80f0\u5c9b\u3001\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09</span>}</div>"}, {"index": 1, "class": "\u7ed9\u836f\u9014\u5f84", "text": "\u76ae\u4e0b\u6ce8\u5c04", "color": "#FEF0C3", "startPos": 54, "endPos": 58, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a", "extractionText": "\u76ae\u4e0b\u6ce8\u5c04", "afterText": "\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u7ed9\u836f\u9014\u5f84</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09</span>}</div>"}, {"index": 2, "class": "\u5242\u91cf", "text": "10U/\u6b21", "color": "#D2E3FC", "startPos": 61, "endPos": 64, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b21", "extractionText": "10U", "afterText": "\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u5242\u91cf</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09</span>}</div>"}, {"index": 3, "class": "\u7528\u836f\u9891\u7387", "text": "\u6bcf\u9910\u524d30\u5206\u949f", "color": "#C8E6C9", "startPos": 65, "endPos": 72, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c", "extractionText": "\u6bcf\u9910\u524d30\u5206\u949f", "afterText": "\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u7528\u836f\u9891\u7387</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09</span>}</div>"}, {"index": 4, "class": "\u836f\u54c1\u540d\u79f0", "text": "\u4e8c\u7532\u53cc\u80cd\u7247", "color": "#F9DEDC", "startPos": 82, "endPos": 87, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. ", "extractionText": "\u4e8c\u7532\u53cc\u80cd\u7247", "afterText": "\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u836f\u54c1\u540d\u79f0</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u4e8c\u7532\u53cc\u80cd\u7247</span>}</div>"}, {"index": 5, "class": "\u7ed9\u836f\u9014\u5f84", "text": "\u53e3\u670d", "color": "#FEF0C3", "startPos": 88, "endPos": 90, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a", "extractionText": "\u53e3\u670d", "afterText": "\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u7ed9\u836f\u9014\u5f84</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u4e8c\u7532\u53cc\u80cd\u7247</span>}</div>"}, {"index": 6, "class": "\u7ed9\u836f\u9014\u5f84", "text": "\u53e3\u670d", "color": "#FEF0C3", "startPos": 88, "endPos": 90, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a", "extractionText": "\u53e3\u670d", "afterText": "\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u7ed9\u836f\u9014\u5f84</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247</span>}</div>"}, {"index": 7, "class": "\u5242\u91cf", "text": "500mg/\u6b21", "color": "#D2E3FC", "startPos": 93, "endPos": 98, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21", "extractionText": "500mg", "afterText": "\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u5242\u91cf</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u4e8c\u7532\u53cc\u80cd\u7247</span>}</div>"}, {"index": 8, "class": "\u7528\u836f\u9891\u7387", "text": "\u6bcf\u65e53\u6b21", "color": "#C8E6C9", "startPos": 99, "endPos": 103, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21500mg\uff0c", "extractionText": "\u6bcf\u65e53\u6b21", "afterText": "\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u7528\u836f\u9891\u7387</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u4e8c\u7532\u53cc\u80cd\u7247</span>}</div>"}, {"index": 9, "class": "\u836f\u54c1\u540d\u79f0", "text": "\u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247", "color": "#F9DEDC", "startPos": 114, "endPos": 121, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. ", "extractionText": "\u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247", "afterText": "\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u836f\u54c1\u540d\u79f0</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247</span>}</div>"}, {"index": 10, "class": "\u5242\u91cf", "text": "20mg/\u6b21", "color": "#D2E3FC", "startPos": 127, "endPos": 131, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21", "extractionText": "20mg", "afterText": "\uff0c\u6bcf\u665a1\u6b21\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u5242\u91cf</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247</span>}</div>"}, {"index": 11, "class": "\u7528\u836f\u9891\u7387", "text": "\u6bcf\u665a1\u6b21", "color": "#C8E6C9", "startPos": 132, "endPos": 136, "beforeText": "\n\u3010\u75c5\u5386\u6458\u8981\u3011\n\u60a3\u8005\u5973\u6027\uff0c65\u5c81\uff0c2\u578b\u7cd6\u5c3f\u75c5\u75c5\u53f25\u5e74\uff0c\u672c\u6b21\u56e0\u8840\u7cd6\u63a7\u5236\u4e0d\u4f73\u5165\u9662\uff1a\n1. \u80f0\u5c9b\u7d20\u6ce8\u5c04\u6db2\uff08\u77ed\u6548\uff09\uff1a\u76ae\u4e0b\u6ce8\u5c04\uff0c\u6bcf\u6b2110U\uff0c\u6bcf\u9910\u524d30\u5206\u949f\uff0c\u6301\u7eed\u4f7f\u7528\uff1b\n2. \u4e8c\u7532\u53cc\u80cd\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b21500mg\uff0c\u6bcf\u65e53\u6b21\uff0c\u8fde\u670d30\u5929\uff1b\n3. \u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247\uff1a\u53e3\u670d\uff0c\u6bcf\u6b2120mg\uff0c", "extractionText": "\u6bcf\u665a1\u6b21", "afterText": "\uff0c\u957f\u671f\u670d\u7528\u3002\n", "attributesHtml": "<div><strong>class:</strong> \u7528\u836f\u9891\u7387</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">\u836f\u54c1\u7ec4</span>: <span class=\"lx-attr-value\">\u963f\u6258\u4f10\u4ed6\u6c40\u9499\u7247</span>}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>

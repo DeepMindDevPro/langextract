@@ -1,0 +1,219 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">character</span> <span class="lx-label" style="background-color:#C8E6C9;">dialogue</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+        Act I, Scene I. Verona. A public place.
+
+Enter <span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#D2E3FC;">SAMPSON</span> and GREGORY, armed with swords and bucklers.
+
+SAMPSON: <span class="lx-highlight" data-idx="1" style="background-color:#C8E6C9;">Gregory, on my word, we&#x27;ll not carry coals.</span>
+GREGORY: <span class="lx-highlight" data-idx="2" style="background-color:#C8E6C9;">No, for then we should be colliers.</span>
+SAMPSON: <span class="lx-highlight" data-idx="3" style="background-color:#C8E6C9;">I mean, an we be in choler, we&#x27;ll draw.</span>
+GREGORY: <span class="lx-highlight" data-idx="4" style="background-color:#C8E6C9;">Ay, while you live, draw your neck out of collar.</span>
+
+Enter <span class="lx-highlight" data-idx="5" style="background-color:#D2E3FC;">ABRAHAM</span> and BALTHASAR.
+
+ABRAHAM: <span class="lx-highlight" data-idx="6" style="background-color:#C8E6C9;">Do you bite your thumb at us, sir?</span>
+SAMPSON: <span class="lx-highlight" data-idx="7" style="background-color:#C8E6C9;">I do bite my thumb, sir.</span>
+ABRAHAM: <span class="lx-highlight" data-idx="8" style="background-color:#C8E6C9;">Do you bite your thumb at us, sir?</span>
+<span class="lx-highlight" data-idx="9" style="background-color:#D2E3FC;">SAMPSON</span>: <span class="lx-highlight" data-idx="10" style="background-color:#C8E6C9;">No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.</span>
+<span class="lx-highlight" data-idx="11" style="background-color:#D2E3FC;">GREGORY</span>: <span class="lx-highlight" data-idx="12" style="background-color:#C8E6C9;">Do you quarrel, sir?</span>
+<span class="lx-highlight" data-idx="13" style="background-color:#D2E3FC;">ABRAHAM</span>: <span class="lx-highlight" data-idx="14" style="background-color:#C8E6C9;">Quarrel, sir? No, sir.</span>
+
+Enter <span class="lx-highlight" data-idx="15" style="background-color:#D2E3FC;">BENVOLIO</span>.
+
+BENVOLIO: <span class="lx-highlight" data-idx="16" style="background-color:#C8E6C9;">Part, fools! Put up your swords. You know not what you do.</span>
+
+Enter <span class="lx-highlight" data-idx="17" style="background-color:#D2E3FC;">TYBALT</span>.
+
+TYBALT: <span class="lx-highlight" data-idx="18" style="background-color:#C8E6C9;">What, art thou drawn among these heartless hinds?</span>
+<span class="lx-highlight" data-idx="19" style="background-color:#C8E6C9;">Turn thee, Benvolio; look upon thy death.</span>
+<span class="lx-highlight" data-idx="20" style="background-color:#D2E3FC;">BENVOLIO</span>: <span class="lx-highlight" data-idx="21" style="background-color:#C8E6C9;">I do but keep the peace. Put up thy sword,
+Or manage it to part these men with me.</span>
+<span class="lx-highlight" data-idx="22" style="background-color:#D2E3FC;">TYBALT</span>: <span class="lx-highlight" data-idx="23" style="background-color:#C8E6C9;">What, drawn, and talk of peace? I hate the word,</span>
+<span class="lx-highlight" data-idx="24" style="background-color:#C8E6C9;">As I hate hell, all Montagues, and thee.
+Have at thee, coward!</span>
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="24" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/25</span> |
+          Pos <span id="posInfo">[47-54]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "character", "text": "SAMPSON", "color": "#D2E3FC", "startPos": 47, "endPos": 54, "beforeText": "Act I, Scene I. Verona. A public place.\n\nEnter ", "extractionText": "SAMPSON", "afterText": " and GREGORY, armed with swords and bucklers.\n\nSAMPSON: Gregory, on my word, we&#x27;ll not carry coals.\nGREGORY: No, for then we should be colliers.\nSAMPS", "attributesHtml": "<div><strong>class:</strong> character</div><div><strong>attributes:</strong> {}</div>"}, {"index": 1, "class": "dialogue", "text": "Gregory, on my word, we'll not carry coals.", "color": "#C8E6C9", "startPos": 110, "endPos": 153, "beforeText": "Act I, Scene I. Verona. A public place.\n\nEnter SAMPSON and GREGORY, armed with swords and bucklers.\n\nSAMPSON: ", "extractionText": "Gregory, on my word, we&#x27;ll not carry coals.", "afterText": "\nGREGORY: No, for then we should be colliers.\nSAMPSON: I mean, an we be in choler, we&#x27;ll draw.\nGREGORY: Ay, while you live, draw your neck out of coll", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">SAMPSON</span>}</div>"}, {"index": 2, "class": "dialogue", "text": "No, for then we should be colliers.", "color": "#C8E6C9", "startPos": 163, "endPos": 198, "beforeText": "I. Verona. A public place.\n\nEnter SAMPSON and GREGORY, armed with swords and bucklers.\n\nSAMPSON: Gregory, on my word, we&#x27;ll not carry coals.\nGREGORY: ", "extractionText": "No, for then we should be colliers.", "afterText": "\nSAMPSON: I mean, an we be in choler, we&#x27;ll draw.\nGREGORY: Ay, while you live, draw your neck out of collar.\n\nEnter ABRAHAM and BALTHASAR.\n\nABRAHAM: D", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">GREGORY</span>}</div>"}, {"index": 3, "class": "dialogue", "text": "I mean, an we be in choler, we'll draw.", "color": "#C8E6C9", "startPos": 208, "endPos": 247, "beforeText": " GREGORY, armed with swords and bucklers.\n\nSAMPSON: Gregory, on my word, we&#x27;ll not carry coals.\nGREGORY: No, for then we should be colliers.\nSAMPSON: ", "extractionText": "I mean, an we be in choler, we&#x27;ll draw.", "afterText": "\nGREGORY: Ay, while you live, draw your neck out of collar.\n\nEnter ABRAHAM and BALTHASAR.\n\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: I do b", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">SAMPSON</span>}</div>"}, {"index": 4, "class": "dialogue", "text": "Ay, while you live, draw your neck out of collar.", "color": "#C8E6C9", "startPos": 257, "endPos": 306, "beforeText": "N: Gregory, on my word, we&#x27;ll not carry coals.\nGREGORY: No, for then we should be colliers.\nSAMPSON: I mean, an we be in choler, we&#x27;ll draw.\nGREGORY: ", "extractionText": "Ay, while you live, draw your neck out of collar.", "afterText": "\n\nEnter ABRAHAM and BALTHASAR.\n\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: I do bite my thumb, sir.\nABRAHAM: Do you bite your thumb at us, s", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">GREGORY</span>}</div>"}, {"index": 5, "class": "character", "text": "ABRAHAM", "color": "#D2E3FC", "startPos": 314, "endPos": 321, "beforeText": "o, for then we should be colliers.\nSAMPSON: I mean, an we be in choler, we&#x27;ll draw.\nGREGORY: Ay, while you live, draw your neck out of collar.\n\nEnter ", "extractionText": "ABRAHAM", "afterText": " and BALTHASAR.\n\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: I do bite my thumb, sir.\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: No", "attributesHtml": "<div><strong>class:</strong> character</div><div><strong>attributes:</strong> {}</div>"}, {"index": 6, "class": "dialogue", "text": "Do you bite your thumb at us, sir?", "color": "#C8E6C9", "startPos": 347, "endPos": 381, "beforeText": ".\nSAMPSON: I mean, an we be in choler, we&#x27;ll draw.\nGREGORY: Ay, while you live, draw your neck out of collar.\n\nEnter ABRAHAM and BALTHASAR.\n\nABRAHAM: ", "extractionText": "Do you bite your thumb at us, sir?", "afterText": "\nSAMPSON: I do bite my thumb, sir.\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: No, sir, I do not bite my thumb at you, sir, but I bite my thu", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">ABRAHAM</span>}</div>"}, {"index": 7, "class": "dialogue", "text": "I do bite my thumb, sir.", "color": "#C8E6C9", "startPos": 391, "endPos": 415, "beforeText": " draw.\nGREGORY: Ay, while you live, draw your neck out of collar.\n\nEnter ABRAHAM and BALTHASAR.\n\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: ", "extractionText": "I do bite my thumb, sir.", "afterText": "\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.\nGREGORY: Do you quarrel, ", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">SAMPSON</span>}</div>"}, {"index": 8, "class": "dialogue", "text": "Do you bite your thumb at us, sir?", "color": "#C8E6C9", "startPos": 425, "endPos": 459, "beforeText": ", draw your neck out of collar.\n\nEnter ABRAHAM and BALTHASAR.\n\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: I do bite my thumb, sir.\nABRAHAM: ", "extractionText": "Do you bite your thumb at us, sir?", "afterText": "\nSAMPSON: No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.\nGREGORY: Do you quarrel, sir?\nABRAHAM: Quarrel, sir? No, sir.\n\nEnter ", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">ABRAHAM</span>}</div>"}, {"index": 9, "class": "character", "text": "SAMPSON", "color": "#D2E3FC", "startPos": 460, "endPos": 467, "beforeText": "ter ABRAHAM and BALTHASAR.\n\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: I do bite my thumb, sir.\nABRAHAM: Do you bite your thumb at us, sir?\n", "extractionText": "SAMPSON", "afterText": ": No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.\nGREGORY: Do you quarrel, sir?\nABRAHAM: Quarrel, sir? No, sir.\n\nEnter BENVOLIO", "attributesHtml": "<div><strong>class:</strong> character</div><div><strong>attributes:</strong> {}</div>"}, {"index": 10, "class": "dialogue", "text": "No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.", "color": "#C8E6C9", "startPos": 469, "endPos": 539, "beforeText": "AM and BALTHASAR.\n\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: I do bite my thumb, sir.\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: ", "extractionText": "No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.", "afterText": "\nGREGORY: Do you quarrel, sir?\nABRAHAM: Quarrel, sir? No, sir.\n\nEnter BENVOLIO.\n\nBENVOLIO: Part, fools! Put up your swords. You know not what you do.\n", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">SAMPSON</span>}</div>"}, {"index": 11, "class": "character", "text": "GREGORY", "color": "#D2E3FC", "startPos": 540, "endPos": 547, "beforeText": " I do bite my thumb, sir.\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.\n", "extractionText": "GREGORY", "afterText": ": Do you quarrel, sir?\nABRAHAM: Quarrel, sir? No, sir.\n\nEnter BENVOLIO.\n\nBENVOLIO: Part, fools! Put up your swords. You know not what you do.\n\nEnter T", "attributesHtml": "<div><strong>class:</strong> character</div><div><strong>attributes:</strong> {}</div>"}, {"index": 12, "class": "dialogue", "text": "Do you quarrel, sir?", "color": "#C8E6C9", "startPos": 549, "endPos": 569, "beforeText": "e my thumb, sir.\nABRAHAM: Do you bite your thumb at us, sir?\nSAMPSON: No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.\nGREGORY: ", "extractionText": "Do you quarrel, sir?", "afterText": "\nABRAHAM: Quarrel, sir? No, sir.\n\nEnter BENVOLIO.\n\nBENVOLIO: Part, fools! Put up your swords. You know not what you do.\n\nEnter TYBALT.\n\nTYBALT: What, ", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">GREGORY</span>}</div>"}, {"index": 13, "class": "character", "text": "ABRAHAM", "color": "#D2E3FC", "startPos": 570, "endPos": 577, "beforeText": "HAM: Do you bite your thumb at us, sir?\nSAMPSON: No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.\nGREGORY: Do you quarrel, sir?\n", "extractionText": "ABRAHAM", "afterText": ": Quarrel, sir? No, sir.\n\nEnter BENVOLIO.\n\nBENVOLIO: Part, fools! Put up your swords. You know not what you do.\n\nEnter TYBALT.\n\nTYBALT: What, art thou", "attributesHtml": "<div><strong>class:</strong> character</div><div><strong>attributes:</strong> {}</div>"}, {"index": 14, "class": "dialogue", "text": "Quarrel, sir? No, sir.", "color": "#C8E6C9", "startPos": 579, "endPos": 601, "beforeText": "ou bite your thumb at us, sir?\nSAMPSON: No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.\nGREGORY: Do you quarrel, sir?\nABRAHAM: ", "extractionText": "Quarrel, sir? No, sir.", "afterText": "\n\nEnter BENVOLIO.\n\nBENVOLIO: Part, fools! Put up your swords. You know not what you do.\n\nEnter TYBALT.\n\nTYBALT: What, art thou drawn among these heart", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">ABRAHAM</span>}</div>"}, {"index": 15, "class": "character", "text": "BENVOLIO", "color": "#D2E3FC", "startPos": 609, "endPos": 617, "beforeText": "\nSAMPSON: No, sir, I do not bite my thumb at you, sir, but I bite my thumb, sir.\nGREGORY: Do you quarrel, sir?\nABRAHAM: Quarrel, sir? No, sir.\n\nEnter ", "extractionText": "BENVOLIO", "afterText": ".\n\nBENVOLIO: Part, fools! Put up your swords. You know not what you do.\n\nEnter TYBALT.\n\nTYBALT: What, art thou drawn among these heartless hinds?\nTurn", "attributesHtml": "<div><strong>class:</strong> character</div><div><strong>attributes:</strong> {}</div>"}, {"index": 16, "class": "dialogue", "text": "Part, fools! Put up your swords. You know not what you do.", "color": "#C8E6C9", "startPos": 630, "endPos": 688, "beforeText": "do not bite my thumb at you, sir, but I bite my thumb, sir.\nGREGORY: Do you quarrel, sir?\nABRAHAM: Quarrel, sir? No, sir.\n\nEnter BENVOLIO.\n\nBENVOLIO: ", "extractionText": "Part, fools! Put up your swords. You know not what you do.", "afterText": "\n\nEnter TYBALT.\n\nTYBALT: What, art thou drawn among these heartless hinds?\nTurn thee, Benvolio; look upon thy death.\nBENVOLIO: I do but keep the peace", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">BENVOLIO</span>}</div>"}, {"index": 17, "class": "character", "text": "TYBALT", "color": "#D2E3FC", "startPos": 696, "endPos": 702, "beforeText": "Y: Do you quarrel, sir?\nABRAHAM: Quarrel, sir? No, sir.\n\nEnter BENVOLIO.\n\nBENVOLIO: Part, fools! Put up your swords. You know not what you do.\n\nEnter ", "extractionText": "TYBALT", "afterText": ".\n\nTYBALT: What, art thou drawn among these heartless hinds?\nTurn thee, Benvolio; look upon thy death.\nBENVOLIO: I do but keep the peace. Put up thy s", "attributesHtml": "<div><strong>class:</strong> character</div><div><strong>attributes:</strong> {}</div>"}, {"index": 18, "class": "dialogue", "text": "What, art thou drawn among these heartless hinds?", "color": "#C8E6C9", "startPos": 713, "endPos": 762, "beforeText": ", sir?\nABRAHAM: Quarrel, sir? No, sir.\n\nEnter BENVOLIO.\n\nBENVOLIO: Part, fools! Put up your swords. You know not what you do.\n\nEnter TYBALT.\n\nTYBALT: ", "extractionText": "What, art thou drawn among these heartless hinds?", "afterText": "\nTurn thee, Benvolio; look upon thy death.\nBENVOLIO: I do but keep the peace. Put up thy sword,\nOr manage it to part these men with me.\nTYBALT: What, ", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">TYBALT</span>}</div>"}, {"index": 19, "class": "dialogue", "text": "Turn thee, Benvolio; look upon thy death.", "color": "#C8E6C9", "startPos": 763, "endPos": 804, "beforeText": "OLIO.\n\nBENVOLIO: Part, fools! Put up your swords. You know not what you do.\n\nEnter TYBALT.\n\nTYBALT: What, art thou drawn among these heartless hinds?\n", "extractionText": "Turn thee, Benvolio; look upon thy death.", "afterText": "\nBENVOLIO: I do but keep the peace. Put up thy sword,\nOr manage it to part these men with me.\nTYBALT: What, drawn, and talk of peace? I hate the word,", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">TYBALT</span>}</div>"}, {"index": 20, "class": "character", "text": "BENVOLIO", "color": "#D2E3FC", "startPos": 805, "endPos": 813, "beforeText": "swords. You know not what you do.\n\nEnter TYBALT.\n\nTYBALT: What, art thou drawn among these heartless hinds?\nTurn thee, Benvolio; look upon thy death.\n", "extractionText": "BENVOLIO", "afterText": ": I do but keep the peace. Put up thy sword,\nOr manage it to part these men with me.\nTYBALT: What, drawn, and talk of peace? I hate the word,\nAs I hat", "attributesHtml": "<div><strong>class:</strong> character</div><div><strong>attributes:</strong> {}</div>"}, {"index": 21, "class": "dialogue", "text": "I do but keep the peace. Put up thy sword, Or manage it to part these men with me.", "color": "#C8E6C9", "startPos": 815, "endPos": 897, "beforeText": "u know not what you do.\n\nEnter TYBALT.\n\nTYBALT: What, art thou drawn among these heartless hinds?\nTurn thee, Benvolio; look upon thy death.\nBENVOLIO: ", "extractionText": "I do but keep the peace. Put up thy sword,\nOr manage it to part these men with me.", "afterText": "\nTYBALT: What, drawn, and talk of peace? I hate the word,\nAs I hate hell, all Montagues, and thee.\nHave at thee, coward!", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">BENVOLIO</span>}</div>"}, {"index": 22, "class": "character", "text": "TYBALT", "color": "#D2E3FC", "startPos": 898, "endPos": 904, "beforeText": "artless hinds?\nTurn thee, Benvolio; look upon thy death.\nBENVOLIO: I do but keep the peace. Put up thy sword,\nOr manage it to part these men with me.\n", "extractionText": "TYBALT", "afterText": ": What, drawn, and talk of peace? I hate the word,\nAs I hate hell, all Montagues, and thee.\nHave at thee, coward!", "attributesHtml": "<div><strong>class:</strong> character</div><div><strong>attributes:</strong> {}</div>"}, {"index": 23, "class": "dialogue", "text": "What, drawn, and talk of peace? I hate the word,", "color": "#C8E6C9", "startPos": 906, "endPos": 954, "beforeText": "hinds?\nTurn thee, Benvolio; look upon thy death.\nBENVOLIO: I do but keep the peace. Put up thy sword,\nOr manage it to part these men with me.\nTYBALT: ", "extractionText": "What, drawn, and talk of peace? I hate the word,", "afterText": "\nAs I hate hell, all Montagues, and thee.\nHave at thee, coward!", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">TYBALT</span>}</div>"}, {"index": 24, "class": "dialogue", "text": "As I hate hell, all Montagues, and thee. Have at thee, coward!", "color": "#C8E6C9", "startPos": 955, "endPos": 1017, "beforeText": "BENVOLIO: I do but keep the peace. Put up thy sword,\nOr manage it to part these men with me.\nTYBALT: What, drawn, and talk of peace? I hate the word,\n", "extractionText": "As I hate hell, all Montagues, and thee.\nHave at thee, coward!", "afterText": "", "attributesHtml": "<div><strong>class:</strong> dialogue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">speaker</span>: <span class=\"lx-attr-value\">TYBALT</span>}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>

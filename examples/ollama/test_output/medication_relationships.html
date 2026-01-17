@@ -1,0 +1,191 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">condition</span> <span class="lx-label" style="background-color:#C8E6C9;">dosage</span> <span class="lx-label" style="background-color:#FEF0C3;">frequency</span> <span class="lx-label" style="background-color:#F9DEDC;">medication</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+        The patient was prescribed <span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#F9DEDC;">Lisinopril</span> and Metformin last month.
+He takes the Lisinopril <span class="lx-highlight" data-idx="1" style="background-color:#C8E6C9;">10mg</span> <span class="lx-highlight" data-idx="2" style="background-color:#FEF0C3;">daily</span> for <span class="lx-highlight" data-idx="3" style="background-color:#D2E3FC;">hypertension</span>, but often misses
+his <span class="lx-highlight" data-idx="4" style="background-color:#F9DEDC;">Metformin</span> <span class="lx-highlight" data-idx="5" style="background-color:#C8E6C9;">500mg</span> dose which should be taken <span class="lx-highlight" data-idx="6" style="background-color:#FEF0C3;">twice daily</span> for <span class="lx-highlight" data-idx="7" style="background-color:#D2E3FC;">diabetes</span>.
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="7" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/8</span> |
+          Pos <span id="posInfo">[27-37]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "medication", "text": "Lisinopril", "color": "#F9DEDC", "startPos": 27, "endPos": 37, "beforeText": "The patient was prescribed ", "extractionText": "Lisinopril", "afterText": " and Metformin last month.\nHe takes the Lisinopril 10mg daily for hypertension, but often misses\nhis Metformin 500mg dose which should be taken twice ", "attributesHtml": "<div><strong>class:</strong> medication</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">medication_group</span>: <span class=\"lx-attr-value\">Lisinopril</span>}</div>"}, {"index": 1, "class": "dosage", "text": "10mg", "color": "#C8E6C9", "startPos": 88, "endPos": 92, "beforeText": "The patient was prescribed Lisinopril and Metformin last month.\nHe takes the Lisinopril ", "extractionText": "10mg", "afterText": " daily for hypertension, but often misses\nhis Metformin 500mg dose which should be taken twice daily for diabetes.", "attributesHtml": "<div><strong>class:</strong> dosage</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">medication_group</span>: <span class=\"lx-attr-value\">Lisinopril</span>}</div>"}, {"index": 2, "class": "frequency", "text": "daily", "color": "#FEF0C3", "startPos": 93, "endPos": 98, "beforeText": "The patient was prescribed Lisinopril and Metformin last month.\nHe takes the Lisinopril 10mg ", "extractionText": "daily", "afterText": " for hypertension, but often misses\nhis Metformin 500mg dose which should be taken twice daily for diabetes.", "attributesHtml": "<div><strong>class:</strong> frequency</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">medication_group</span>: <span class=\"lx-attr-value\">Lisinopril</span>}</div>"}, {"index": 3, "class": "condition", "text": "hypertension", "color": "#D2E3FC", "startPos": 103, "endPos": 115, "beforeText": "The patient was prescribed Lisinopril and Metformin last month.\nHe takes the Lisinopril 10mg daily for ", "extractionText": "hypertension", "afterText": ", but often misses\nhis Metformin 500mg dose which should be taken twice daily for diabetes.", "attributesHtml": "<div><strong>class:</strong> condition</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">medication_group</span>: <span class=\"lx-attr-value\">Lisinopril</span>}</div>"}, {"index": 4, "class": "medication", "text": "Metformin", "color": "#F9DEDC", "startPos": 138, "endPos": 147, "beforeText": "The patient was prescribed Lisinopril and Metformin last month.\nHe takes the Lisinopril 10mg daily for hypertension, but often misses\nhis ", "extractionText": "Metformin", "afterText": " 500mg dose which should be taken twice daily for diabetes.", "attributesHtml": "<div><strong>class:</strong> medication</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">medication_group</span>: <span class=\"lx-attr-value\">Metformin</span>}</div>"}, {"index": 5, "class": "dosage", "text": "500mg", "color": "#C8E6C9", "startPos": 148, "endPos": 153, "beforeText": "The patient was prescribed Lisinopril and Metformin last month.\nHe takes the Lisinopril 10mg daily for hypertension, but often misses\nhis Metformin ", "extractionText": "500mg", "afterText": " dose which should be taken twice daily for diabetes.", "attributesHtml": "<div><strong>class:</strong> dosage</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">medication_group</span>: <span class=\"lx-attr-value\">Metformin</span>}</div>"}, {"index": 6, "class": "frequency", "text": "twice daily", "color": "#FEF0C3", "startPos": 181, "endPos": 192, "beforeText": "nopril and Metformin last month.\nHe takes the Lisinopril 10mg daily for hypertension, but often misses\nhis Metformin 500mg dose which should be taken ", "extractionText": "twice daily", "afterText": " for diabetes.", "attributesHtml": "<div><strong>class:</strong> frequency</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">medication_group</span>: <span class=\"lx-attr-value\">Metformin</span>}</div>"}, {"index": 7, "class": "condition", "text": "diabetes", "color": "#D2E3FC", "startPos": 197, "endPos": 205, "beforeText": "rmin last month.\nHe takes the Lisinopril 10mg daily for hypertension, but often misses\nhis Metformin 500mg dose which should be taken twice daily for ", "extractionText": "diabetes", "afterText": ".", "attributesHtml": "<div><strong>class:</strong> condition</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">medication_group</span>: <span class=\"lx-attr-value\">Metformin</span>}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>
